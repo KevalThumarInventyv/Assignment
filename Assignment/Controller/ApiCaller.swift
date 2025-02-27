@@ -19,7 +19,7 @@ class ApiCaller {
     static var shared = ApiCaller()
 
     var url: String =
-        "YOUR API"
+        "YOUR API URL HERE"
 
     func getUserData(
         email: String, password: String,
