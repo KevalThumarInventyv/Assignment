@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Task_1
+//  Assignment
 //
-//  Created by Keval Thumar on 10/03/25.
+//  Created by Keval Thumar on 25/02/25.
 //
 
 import UIKit
@@ -10,11 +10,25 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let rootViewController: UIViewController
+
+                if let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty {
+                    
+                    rootViewController = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController") as! WelcomeViewController
+                } else {
+                    
+                    rootViewController = storyboard.instantiateInitialViewController()!
+                }
+
+                window.rootViewController = rootViewController
+                window.makeKeyAndVisible()
+
+                return true
     }
 
     // MARK: UISceneSession Lifecycle
