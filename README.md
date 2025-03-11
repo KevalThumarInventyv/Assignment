@@ -1,44 +1,46 @@
 # Assignment 1
 
-## Task
+## Task Overview
 
-- Create a responsive login screen suitable for tablets and all iPhones.
-- Send a request to the API to initiate the login process, ensuring all validations are applied.
-- Design a Welcome Page that displays the user's details received in the response as pre-filled text fields and dropdown menus.
-- Finally, save all this data in the SQLite database.
+###### Develop a responsive Login & Welcome screen that works across all iPhones and tablets, ensuring smooth data handling and validation.
+
+### **Key Requirements:**
+
+- Design a responsive login screen.
+- Apply all necessary input validations.
+- Send a request to the API to initiate the login process.
+- Save user data securely in the **SQLite database** after login.
+- Display user details from the API response as pre-filled text fields.
+- Show **Gender Selection** using radio buttons.
+- Allow users to modify their details if needed.
+- Save any updated information back to the **SQLite database**.
 
 ## Approach to Do this
 
-- Create a login page with all necessary constraints.
-- Call the API to obtain the response.
-- Store the response in `UserDefault` for data retrieval at any time within the application.
-- Create the Welcome Page using StackView and apply all the necessary constraints to it.
-- Retrieve data from the `UserDefault` and set it when the View loads. Then, using the package, save the data into the SQL database.
-
-## Package link
-
-```link
-https://github.com/stephencelis/SQLite.swift
-```
+- Display a launch screen with the app logo before navigating to the login page.
+- Create a responsive login page with proper constraints for all iPhones and tablets.
+- Validate user credentials and send a login request to the API for authentication.
+- Store the authenticated user’s details in the SQLite database for persistence.
+- Navigate to the Welcome page, pre-filling user details from the database.
+- Allow users to update their details, including name, gender, and height.
+- Save modified data back into the SQLite database for future sessions.
 
 ## Screenshot
 
 ### login page
 
-![login page](https://i.imgur.com/ag7ZxWh.png)
+![login page](https://i.imgur.com/hhmWEm1.png)
 
 ### Welcome page
 
-![Welcome page](https://i.imgur.com/WY6TDpY.png)
-
-### Success Message
-
-![Success Message](https://i.imgur.com/FQSYU1y.png)
-
-### Alert Message
-
-![Alert Message](https://i.imgur.com/orWN36j.png)
+![Welcome page](https://i.imgur.com/LE5UkjM.png)
 
 ### UserData
 
+#### Before change
+
 ![UserData](https://i.imgur.com/7eTrNZD.png)
+
+#### After change
+
+![UserData](https://i.imgur.com/SFj2GvE.png)

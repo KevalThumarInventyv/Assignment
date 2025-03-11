@@ -57,9 +57,10 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate,
             return
         }
 
-        //        get data from the data base to update UI.
-        if let user = DatabaseHelper.shared.getUserData(email: email) {
-
+        // get data from the data base to update UI.
+        if let user = DatabaseHelper.shared.getUserData(
+            email: email, viewController: self)
+        {
             txtFirstName.text = user.firstName
             txtLastName.text = user.lastName
 
@@ -67,10 +68,19 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate,
             updateGenderButtons()
 
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            /*
+             MM :- for Month mm:- for min
+             HH :- 24hr   hh:- 12hr
+       */
+            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+
             if let date = dateFormatter.date(from: user.birthDate) {
                 datePickerDOB.date = date
+            } else {
+                print("Error: Unable to parse date \(user.birthDate)")
             }
+
 
             print(user.height)
             let components = user.height.split(separator: "'")

@@ -12,8 +12,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func btnPasswordEye(_ sender: UIButton) {
+        passwordText.isSecureTextEntry.toggle()
+        let eyeIcon = passwordText.isSecureTextEntry ? "eye.slash" : "eye"
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: eyeIcon, withConfiguration: config)
+        sender.setImage(image, for: .normal)
+        passwordText.rightViewMode = .always
+        let paddingView = UIView(
+            frame: CGRect(x: 0, y: 0, width: 50, height: 35)
+        )
+        passwordText.rightView = paddingView
     }
     
     @IBAction func clickOnLogin(_ sender: UIButton) {
@@ -37,7 +46,8 @@ class ViewController: UIViewController {
     }
     
     func saveUser(_ user: UserModel) {
-        let success = DatabaseHelper.shared.insertUser(firstName: user.firstName ?? "", lastName: user.lastName ?? "", height: "\(user.heightFeet  ?? 0)' \(user.heightInch ?? 0)\"", birthDate: user.dob  ?? "", gender: user.gender == 0 ? "Male" : "Female", email: emailText.text ?? "", viewController: self)
+        
+        let success = DatabaseHelper.shared.insertUser(firstName: user.firstName ?? "", lastName: user.lastName ?? "", height: "\(user.heightFeet  ?? 0)' \(user.heightInch ?? 0)\"", birthDate: user.dob  ?? "", gender: user.gender == 1 ? "Male" : "Female", email: emailText.text ?? "", viewController: self)
 
         if success {
             UserDefaults.standard.set(emailText.text, forKey: "email")

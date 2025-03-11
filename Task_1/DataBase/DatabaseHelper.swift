@@ -96,7 +96,7 @@ class DatabaseHelper {
         }
         
         let insertQuery =
-            "INSERT INTO User (firstName, lastName, height, birthDate, gender) VALUES (?, ?, ?, ?, ?, ?);"
+            "INSERT INTO User (firstName, lastName, height, birthDate, gender, email) VALUES (?, ?, ?, ?, ?, ?);"
 
         var statement: OpaquePointer?
 
@@ -183,7 +183,7 @@ class DatabaseHelper {
 
     //    Get User
     
-    func getUserData(email: String) -> (firstName: String, lastName: String, height: String, birthDate: String, gender: String)? {
+    func getUserData(email: String, viewController: UIViewController) -> (firstName: String, lastName: String, height: String, birthDate: String, gender: String)? {
         let query = "SELECT firstName, lastName, height, birthDate, gender FROM User WHERE email = ?;"
         var statement: OpaquePointer?
         let email_String = email.cString(using: .utf8)
@@ -203,6 +203,28 @@ class DatabaseHelper {
         }
         
         sqlite3_finalize(statement)
+        
+        AlertBoxExtension.shared.showAlert(
+            title: "Oops!",
+            message: "Data not found for this user, please try to login again",
+            viewController: viewController,
+            style: .destructive
+        ) { [weak viewController] _ in
+            guard viewController != nil else { return }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+            let rootViewController = UINavigationController(rootViewController: loginViewController)
+            rootViewController.navigationBar.isHidden = true
+
+            if let scene = UIApplication.shared.connectedScenes
+                .filter({ $0.activationState == .foregroundActive })
+                .first as? UIWindowScene,
+               let window = scene.windows.first {
+                window.rootViewController = rootViewController
+                window.makeKeyAndVisible()
+            }
+        }
+
         return nil
     }
 
