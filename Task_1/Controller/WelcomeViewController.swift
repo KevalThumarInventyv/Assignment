@@ -73,16 +73,12 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate,
              MM :- for Month mm:- for min
              HH :- 24hr   hh:- 12hr
        */
-            dateFormatter.timeZone = TimeZone(identifier: "UTC")
-
-            if let date = dateFormatter.date(from: user.birthDate) {
+            if let date = dateFormatter.date(from: "\(user.birthDate)") {
                 datePickerDOB.date = date
             } else {
                 print("Error: Unable to parse date \(user.birthDate)")
             }
 
-
-            print(user.height)
             let components = user.height.split(separator: "'")
 
             if components.count == 2 {
@@ -187,7 +183,7 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate,
 
     func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         formatter.timeZone = TimeZone(identifier: "UTC")
         return formatter.string(from: date)
     }
