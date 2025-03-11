@@ -16,7 +16,7 @@ class ApiCaller {
     static var shared = ApiCaller()
 
     var url: String =
-        "https://test-hmsync.connect-beurer.com/BHMCWebAPI/User/GetValidateUser"
+        "Your API URL Add here"
 
     func getUserData(
         email: String, password: String,
